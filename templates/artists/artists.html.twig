@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+
+{% block menu %}
+<ul>
+{% for item in menu %}
+<li><a href="{{ path(item.route,item.args) }}">{{ item.text }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}
+{% block body %}
+<ul>
+{% for artist in artists %}
+<li>{{ artist.name }}</li>
+{% endfor %}
+</ul>
+{% endblock %}
