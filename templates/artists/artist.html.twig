@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ artist.name }}{% endblock %}
+{% block body %}
+<h1>{{ artist.name }}</h1>
+<p>
+Style : {{ artist.style }}<br/>
+Dates : {{ artist.dates }}
+</p>
+<h2>Oeuvres</h2>
+<ul>
+{% for oeuvre in artist.oeuvres %}
+<li>{{ oeuvre }}</li>
+{% endfor %}
+</ul>
+</p>
+<a href="{{ path("artist_list") }}">Retour</a>
+{% endblock %}

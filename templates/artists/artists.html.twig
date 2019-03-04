@@ -11,7 +11,7 @@
 {% block body %}
 <ul>
 {% for artist in artists %}
-<li>{{ artist.name }}</li>
+<li><a href="{{ path("artist_detail",{id:artist.id}) }}">{{ artist.name }}</a></li>
 {% endfor %}
 </ul>
 {% endblock %}
