@@ -1,0 +1,10 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Artist creation{% endblock %}
+{% block body %}
+<h1>Create an artist</h1>
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+<a href="{{ path("artist_list") }}">Retour</a>
+{% endblock %}

@@ -1,25 +1,27 @@
 <?php
 namespace App\POPO;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 class Artist
 {
     /**
-     * 
      * @var int
      */
     private $id;
     /**
-     * 
+     * @Assert\NotBlank
+     * @Assert\Length(min=3)
      * @var string
      */
     private $name;
     /**
-     * 
+     * @Assert\NotBlank
      * @var string
      */
     private $style;
     /**
-     * 
+     * @Assert\NotBlank
      * @var string
      */
     private $dates;

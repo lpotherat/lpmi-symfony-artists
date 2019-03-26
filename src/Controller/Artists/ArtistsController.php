@@ -6,6 +6,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ArtistRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\POPO\Artist;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
+use App\Forms\ArtistType;
 
 class ArtistsController extends AbstractController
 {
@@ -41,5 +46,45 @@ class ArtistsController extends AbstractController
         
         return $this->render('artists/artist.html.twig',['artist'=>$artist]);
     }
+    
+    /**
+     * @Route("/artist/create",name="artist_create")
+     * @return Response
+     */
+    public function create(Request $request):Response {
+        $artist = new Artist();
+        
+        /**
+         * Les formulaires peuvent être créés directement dans les contrôleurs
+         * 
+         *
+        $form = $this->createFormBuilder($artist)
+        ->setAction($this->generateUrl($route))
+        ->add('name',TextType::class)
+        ->add('style',TextType::class)
+        ->add('dates',TextType::class)
+        ->add('save', SubmitType::class, ['label' => 'Create artist'])
+        ->getForm()
+        ;*/
+        
+        $form = $this->createForm(ArtistType::class,$artist);
+        
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $artist = $form->getData();  
+            
+            //TODO sauvegarder l'artiste dans la base de données par exemple
+            
+          return $this->redirectToRoute('artist_list');
+        }
+        
+        return $this->render('artists/create.html.twig',[
+            'form'=>$form->createView()
+        ]);
+    }
+    
+    
+    
 }
 
